@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 
-const Button = ({handleClick, text}) => (
+const Button = ({ handleClick, text }) => (
     <button onClick={handleClick}>{text}</button>
 );
 
 const App = () => {
-    const anecdotes = [
+    const allAnecdotes = [
         "If it hurts, do it more often",
         "Adding manpower to a late software project makes it later!",
         "The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.",
@@ -15,33 +15,32 @@ const App = () => {
         "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients",
     ];
 
-    const [selected, setSelected] = useState(0);
+    const [selected, setSelected] = React.useState(0);
+    const [marks, setMarks] = React.useState(new Array(allAnecdotes.length).fill(0));
 
-    const [points, setPoints] = useState(new Array(anecdotes.length).fill(0));
-
-    const addVote = () => {
-        const pointsCopy = [...points];
-        pointsCopy[selected] += 1;
-        setPoints(pointsCopy);
+    const vote = () => {
+        const copyOfMarks = [...marks];
+        copyOfMarks[selected] += 1;
+        setMarks(copyOfMarks);
     };
 
-    const bestAnecdoteIndex = points.indexOf(Math.max(...points));
+    const IndexOfbestAnecdotes = marks.indexOf(Math.max(...marks));
 
     return (
         <div>
             <h1>Anecdote of the day</h1>
-            <div>{anecdotes[selected]}</div>
-            <div>has {points[selected]} points</div>
-            <Button handleClick={() => addVote()} text="vote"/>
+            <div>{allAnecdotes[selected]}</div>
+            <div>has {marks[selected]} points</div>
+            <Button handleClick={() => vote()} text="vote"/>
             <Button
                 handleClick={() =>
-                    setSelected(Math.floor(Math.random() * anecdotes.length))
+                    setSelected(Math.floor(Math.random() * allAnecdotes.length))
                 }
                 text="next anecdote"
             />
             <h1>Anecdote with most votes</h1>
-            <div>{anecdotes[bestAnecdoteIndex]}</div>
-            <div>has {points[bestAnecdoteIndex]} votes</div>
+            <div>{allAnecdotes[IndexOfbestAnecdotes]}</div>
+            <div>has {marks[IndexOfbestAnecdotes]} votes</div>
         </div>
     );
 };
