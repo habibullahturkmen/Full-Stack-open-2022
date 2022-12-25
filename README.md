@@ -6,3 +6,10 @@ Learn React, Redux, Node.js, MongoDB, GraphQL, TypeScript, React Native, GitHub 
 
 - General Info
 - Fundamentals of Web apps
+
+### [Part 1 - Introduction to React](https://fullstackopen.com/en/part1)
+
+- Introduction to React
+- JavaScript
+- Component State, event handlers
+- A more complex state, debugging React apps
